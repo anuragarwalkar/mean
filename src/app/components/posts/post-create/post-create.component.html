@@ -1,3 +1,4 @@
+<div *ngIf="createPost else spinner">
 <mat-card>
     <form #form="ngForm" [formGroup]="createPostForm" (ngSubmit)="onPostClick()">
     <mat-form-field>
@@ -11,3 +12,8 @@
     <button mat-raised-button color="accent" type="submit">Save Post</button>
     </form>
 </mat-card>
+</div>
+
+<ng-template #spinner>
+        <mat-spinner></mat-spinner>
+</ng-template>
