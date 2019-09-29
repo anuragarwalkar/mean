@@ -1,8 +1,13 @@
 <mat-card>
+    <form [formGroup]="createPostForm" (ngSubmit)="onPostClick()">
     <mat-form-field>
-            <textarea matInput placeholder="Leave a comment"></textarea>
+            <input matInput placeholder="Title" formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field>
+            <textarea matInput placeholder="Post Description" formControlName="description"></textarea>
     </mat-form-field>
     
-    <button mat-raised-button color="primary" (click)="onPostClick()">Save Post</button>
-    
+    <button mat-raised-button color="primary" type="submit">Save Post</button>
+    </form>
 </mat-card>
