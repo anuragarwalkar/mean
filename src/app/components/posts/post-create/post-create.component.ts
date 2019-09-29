@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Post } from 'src/app/shared/post.model';
 import { PostService } from 'src/app/services/post.service';
@@ -11,13 +11,14 @@ import { PostService } from 'src/app/services/post.service';
 export class PostCreateComponent implements OnInit {
 
   createPostForm:FormGroup;
+  @ViewChild('form',{static:false}) form;
 
   constructor(private fb:FormBuilder,private postService:PostService) { }
 
   onPostClick(){
     if(this.createPostForm.valid){
       this.postService.addPost(this.createPostForm.value);
-      this.createPostForm.reset();
+      this.form.resetForm();
     }
   }
 
