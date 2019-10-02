@@ -14,6 +14,7 @@ export class PostCreateComponent implements OnInit {
   @ViewChild('form',{static:false}) form;
   toUpdatePostId: string;
   editPost:boolean = false;
+  imagePreview: any;
 
   constructor(private fb:FormBuilder,private postService:PostService) { }
 
@@ -28,6 +29,18 @@ export class PostCreateComponent implements OnInit {
   }
   }
 
+  onImagePicked(event:Event){
+    const file = (event.target as HTMLInputElement).files[0];
+    this.createPostForm.patchValue({image:file});
+    this.createPostForm.get('image').updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = ()=>{
+      this.imagePreview = reader.result;
+    }
+    reader.readAsDataURL(file);
+    console.log('file:', file)
+  }
+
   onEditPost(){
     this.postService.patchPost(this.toUpdatePostId,this.createPostForm.value);
     this.form.resetForm();  
@@ -37,7 +50,8 @@ export class PostCreateComponent implements OnInit {
   ngOnInit() {
     this.createPostForm = this.fb.group({
       title:['',[Validators.required,Validators.minLength(5)]],
-      description:['',[Validators.required,Validators.minLength(10)]]
+      description:['',[Validators.required,Validators.minLength(10)]],
+      image:[null]
     })
 
     this.postService.editPostListner().subscribe(res=>{
