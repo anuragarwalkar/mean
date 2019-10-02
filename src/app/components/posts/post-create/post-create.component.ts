@@ -23,15 +23,15 @@ export class PostCreateComponent implements OnInit {
       this.postService.addPost(this.createPostForm.value);
       this.form.resetForm();
     }
-  }{
+  }else{
     this.onEditPost();
   }
   }
 
   onEditPost(){
     this.postService.patchPost(this.toUpdatePostId,this.createPostForm.value);
+    this.form.resetForm();  
     this.editPost = false;
-    this.form.resetForm();
   }
 
   ngOnInit() {
@@ -41,14 +41,14 @@ export class PostCreateComponent implements OnInit {
     })
 
     this.postService.editPostListner().subscribe(res=>{
-      // console.log('res:', res)
+      if(res != undefined || null){
         this.toUpdatePostId = res._id;
         this.editPost = true;
         this.createPostForm.patchValue({
           title:res.title,
           description:res.description
-
     });
+  }
   })
 
 }
