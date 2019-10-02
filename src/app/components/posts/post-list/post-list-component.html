@@ -1,12 +1,12 @@
 <mat-accordion *ngIf="posts.length > 0 else noPostError">
-    <mat-expansion-panel *ngFor="let post of posts">
+    <mat-expansion-panel *ngFor="let post of posts; let i = index">
         <mat-expansion-panel-header>
            {{post.title}}
         </mat-expansion-panel-header>
         <p>{{post.description}}</p>
         <mat-action-row>
-            <button mat-raised-button color="primary">Edit</button>
-            <button mat-raised-button color="warn">Delete</button>
+            <button mat-raised-button color="primary" (click)="onEditPost(i)">Edit</button>
+            <button mat-raised-button color="warn" (click)="onDeletePost(i)">Delete</button>
         </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>

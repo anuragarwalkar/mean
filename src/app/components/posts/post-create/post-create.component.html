@@ -9,7 +9,7 @@
             <textarea matInput placeholder="Post Description" formControlName="description"></textarea>
     </mat-form-field>
     
-    <button mat-raised-button color="accent" type="submit">Save Post</button>
+    <button mat-raised-button [color]="editPost?'primary':'accent'" type="submit">{{editPost?'Edit Post':'Save Post'}}</button>
     </form>
 </mat-card>
 </div>

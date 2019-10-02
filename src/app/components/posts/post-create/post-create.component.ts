@@ -12,14 +12,26 @@ export class PostCreateComponent implements OnInit {
   createPost = true
   createPostForm:FormGroup;
   @ViewChild('form',{static:false}) form;
+  toUpdatePostId: string;
+  editPost:boolean = false;
 
   constructor(private fb:FormBuilder,private postService:PostService) { }
 
   onPostClick(){
+    if(!this.editPost){
     if(this.createPostForm.valid){
       this.postService.addPost(this.createPostForm.value);
       this.form.resetForm();
     }
+  }{
+    this.onEditPost();
+  }
+  }
+
+  onEditPost(){
+    this.postService.patchPost(this.toUpdatePostId,this.createPostForm.value);
+    this.editPost = false;
+    this.form.resetForm();
   }
 
   ngOnInit() {
@@ -27,6 +39,17 @@ export class PostCreateComponent implements OnInit {
       title:['',[Validators.required,Validators.minLength(5)]],
       description:['',[Validators.required,Validators.minLength(10)]]
     })
-  }
 
+    this.postService.editPostListner().subscribe(res=>{
+      // console.log('res:', res)
+        this.toUpdatePostId = res._id;
+        this.editPost = true;
+        this.createPostForm.patchValue({
+          title:res.title,
+          description:res.description
+
+    });
+  })
+
+}
 }
