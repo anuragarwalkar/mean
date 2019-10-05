@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/cor
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Post } from 'src/app/shared/post.model';
 import { PostService } from 'src/app/services/post.service';
-
+import  {mimeType} from './mime-type-validator';
 @Component({
   selector: 'app-post-create',
   templateUrl: './post-create.component.html',
@@ -38,7 +38,6 @@ export class PostCreateComponent implements OnInit {
       this.imagePreview = reader.result;
     }
     reader.readAsDataURL(file);
-    console.log('file:', file)
   }
 
   onEditPost(){
@@ -51,7 +50,7 @@ export class PostCreateComponent implements OnInit {
     this.createPostForm = this.fb.group({
       title:['',[Validators.required,Validators.minLength(5)]],
       description:['',[Validators.required,Validators.minLength(10)]],
-      image:[null]
+      image:[null,[Validators.required],[mimeType]]
     })
 
     this.postService.editPostListner().subscribe(res=>{

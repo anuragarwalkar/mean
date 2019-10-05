@@ -10,10 +10,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ## Build 
 ng build --prod --base-href "https://anuragarwalkar.github.io/angular-material/"
 
-npm i angular-cli-ghpages --save-dev
-
 npx ngh --dir=dist/angular
-
 
 ## Code scaffolding
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.

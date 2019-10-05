@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {Subject, Observable} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Title } from '@angular/platform-browser';
 @Injectable({providedIn:'root'})
 export class PostService {
     private posts:Post[] = [];
@@ -24,8 +25,12 @@ export class PostService {
         return this.postUpdated.asObservable();
     }
 
-    addPost(post:Post):void{
-    this.http.post<Post>(`${environment.api}/posts`,post).subscribe(res=>{
+    addPost(post:any):void{
+        const postData = new FormData();
+        postData.append('title',post.title);
+        postData.append('description',post.description);
+        postData.append('image',post.image,post.title);
+        this.http.post<Post>(`${environment.api}/posts`,postData).subscribe(res=>{
         // console.log('res:', res)
         this.posts.push(res);
         this.postUpdated.next([...this.posts]);
