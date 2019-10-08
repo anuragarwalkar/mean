@@ -15,6 +15,7 @@ export class PostCreateComponent implements OnInit {
   toUpdatePostId: string;
   editPost:boolean = false;
   imagePreview: any;
+  isSaveEditDisabled:boolean;
 
   constructor(private fb:FormBuilder,private postService:PostService) { }
 
@@ -50,8 +51,9 @@ export class PostCreateComponent implements OnInit {
     this.createPostForm = this.fb.group({
       title:['',[Validators.required,Validators.minLength(5)]],
       description:['',[Validators.required,Validators.minLength(10)]],
-      image:[null,[Validators.required],[mimeType]]
-    })
+      // image:[null,[Validators.required],[mimeType]]
+      image:[null]
+    });
 
     this.postService.editPostListner().subscribe(res=>{
       if(res != undefined || null){
@@ -62,7 +64,10 @@ export class PostCreateComponent implements OnInit {
           description:res.description
     });
   }
-  })
+  });
 
+  this.postService.getSpinnerListner().subscribe((isSaveEditDisabled)=>{
+    this.isSaveEditDisabled = isSaveEditDisabled; 
+  })
 }
 }

@@ -9,15 +9,15 @@ export class PostService {
     private posts:Post[] = [];
     private postUpdated = new Subject<Post[]>();
     private editPost = new Subject<any>();
+    private spinnner = new Subject<boolean>();
 
-    constructor(private http:HttpClient){
-
-    }
+    constructor(private http:HttpClient){}
 
     getPosts():void{
      this.http.get<Post[]>(`${environment.api}/posts`).subscribe(posts=>{
          this.posts = posts;
-         this.postUpdated.next([...this.posts])
+         this.postUpdated.next([...this.posts]);
+         this.hideSpinner();
      });
     }
 
@@ -26,27 +26,33 @@ export class PostService {
     }
 
     addPost(post:any):void{
+        this.showSpinner();
         const postData = new FormData();
         postData.append('title',post.title);
         postData.append('description',post.description);
-        postData.append('image',post.image,post.title);
+        if(post.image != null){
+            postData.append('image',post.image,post.title);
+        }
         this.http.post<Post>(`${environment.api}/posts`,postData).subscribe(res=>{
         // console.log('res:', res)
         this.posts.push(res);
         this.postUpdated.next([...this.posts]);
+        this.hideSpinner();
     })
         
     }
 
-    deletePost(postIndex:number){
+    deletePost(postIndex:number):void{
+     this.showSpinner();
      const _id =   this.posts[postIndex]._id;
      this.http.delete<any>(`${environment.api}/posts/${_id}`).subscribe(res=>{
-         this.posts.splice(postIndex,1);
+        this.posts.splice(postIndex,1);
         this.postUpdated.next([...this.posts]);
+        this.hideSpinner();
      })   
     }
 
-    passEditPost(postIndex:number){
+    passEditPost(postIndex:number):void{
         this.editPost.next(this.posts[postIndex]);
     }
 
@@ -54,14 +60,29 @@ export class PostService {
         return this.editPost.asObservable();
     }
 
-    patchPost(postId:string,post:Post){
-    this.http.patch<any>(`${environment.api}/posts/${postId}`,post).subscribe(res=>{
+    patchPost(postId:string,post:Post):void{
+        this.showSpinner();
+        this.http.patch<any>(`${environment.api}/posts/${postId}`,post).
+        subscribe(res=>{
         const remainingPost = this.posts.filter(item=>{
             return item._id != postId;
         }) 
         this.posts = remainingPost;
         this.posts.unshift(res);
         this.postUpdated.next([...this.posts]);
+        this.hideSpinner();
     })
+    }
+
+    getSpinnerListner():Observable<boolean>{
+        return this.spinnner.asObservable();
+    }
+
+    showSpinner():void{
+        this.spinnner.next(true);
+    }
+
+    hideSpinner():void{
+        this.spinnner.next(false);
     }
 }

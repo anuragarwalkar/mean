@@ -9,7 +9,7 @@
         <button mat-stroked-button (click)="filePicker.click()" type="button">Pick Image</button>
         <input type="file" (change)="onImagePicked($event)" #filePicker>
     </div>
-    <div class="image-preview" *ngIf="createPostForm.get('image').valid">
+    <div class="image-preview" *ngIf="createPostForm.get('image').valid && createPostForm.get('image').value != null">
             <img [src]="imagePreview" [alt]="createPostForm.value.title">
     </div>
 
@@ -17,7 +17,7 @@
             <textarea matInput placeholder="Post Description" formControlName="description"></textarea>
     </mat-form-field>
     
-    <button mat-raised-button [color]="editPost?'primary':'accent'" type="submit">{{editPost?'Edit Post':'Save Post'}}</button>
+    <button mat-raised-button [disabled]="isSaveEditDisabled" [color]="editPost?'primary':'accent'" type="submit">{{editPost?'Edit Post':'Save Post'}}</button>
     </form>
 </mat-card>
 </div>

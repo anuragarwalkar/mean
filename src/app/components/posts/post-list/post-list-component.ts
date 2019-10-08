@@ -13,7 +13,9 @@ import { Subscription } from 'rxjs';
 export class PostListComponent implements OnInit, OnDestroy{
 
     posts:Post[] = [];
-    private postSub:Subscription
+    private postSub:Subscription;
+    apiResponseReady:boolean = false;
+    spinnerSub: Subscription;
 
     constructor(private postService:PostService){}
 
@@ -21,6 +23,10 @@ export class PostListComponent implements OnInit, OnDestroy{
        this.postService.getPosts();
        this.postSub = this.postService.getPostUpdateListner().subscribe((posts)=>{
             this.posts = posts;
+        })
+
+        this.spinnerSub = this.postService.getSpinnerListner().subscribe((showSpinner)=>{
+            this.apiResponseReady = !showSpinner;
         })
     }
 
