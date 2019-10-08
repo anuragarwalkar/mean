@@ -51,8 +51,8 @@ export class PostCreateComponent implements OnInit {
     this.createPostForm = this.fb.group({
       title:['',[Validators.required,Validators.minLength(5)]],
       description:['',[Validators.required,Validators.minLength(10)]],
-      image:[null,[Validators.required],[mimeType]]
-      // image:[null]
+      // image:[null,[Validators.required],[mimeType]]
+      image:[null]
     });
 
     this.postService.editPostListner().subscribe(res=>{
