@@ -14,3 +14,8 @@ mat-expansion-panel{
 mat-spinner{
     margin:4rem auto 0 auto;
 }
+
+.post-image,img{
+    width: 100%;
+    height: auto;
+}
