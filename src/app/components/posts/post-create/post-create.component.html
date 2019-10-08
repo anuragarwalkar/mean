@@ -18,6 +18,7 @@
     </mat-form-field>
     
     <button mat-raised-button [disabled]="isSaveEditDisabled" [color]="editPost?'primary':'accent'" type="submit">{{editPost?'Edit Post':'Save Post'}}</button>
+    <button mat-raised-button [color]="'accent'" class="ml-2" *ngIf="editPost" (click)="onCancel()" type="button">Cancel</button>
     </form>
 </mat-card>
 </div>

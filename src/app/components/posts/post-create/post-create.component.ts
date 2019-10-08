@@ -70,4 +70,10 @@ export class PostCreateComponent implements OnInit {
     this.isSaveEditDisabled = isSaveEditDisabled; 
   })
 }
+
+  onCancel(){
+    this.editPost = false;
+    this.form.resetForm();  
+    this.toUpdatePostId = null;
+  }
 }
