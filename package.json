@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --base-href https://anuragarwalkar.github.io/angular-material/",
-    "host": "npx ngh --dir=dist/angular",
+    "build": "ng build",
+    "host": "ng build --prod --base-href https://anuragarwalkar.github.io/angular-material/ && npx ngh --dir=dist/angular",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
