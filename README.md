@@ -4,6 +4,9 @@
 Front End : Angular Version 8.3.6 <br>
 Back End : NodeJs & MongoDb
 
+## Author
+Anurag Arwalkar
+
 ## API Link
 
 Hosted On Heroku `https://nodejs-backend-posts.herokuapp.com/api`
