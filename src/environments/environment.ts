@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api:'http://anurag.ddns.net:3000/api'
+  api:'http://localhost:3000/api'
 };
 
 /*
