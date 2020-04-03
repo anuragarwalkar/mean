@@ -6,7 +6,10 @@ RUN npm install -g @angular/cli
 
 WORKDIR /usr/src/app
 
+## Copy all files to working dir
 COPY . .
+
+##Running npm install and build
 RUN npm install
 RUN ng build --prod
 
