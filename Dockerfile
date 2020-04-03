@@ -20,6 +20,7 @@ WORKDIR /usr/src/app
 # Remove default nginx index page
 RUN rm -rf /usr/share/nginx/html/*
 
+#Copying files from angular dist folder to nginx html folder
 COPY --from=builder /usr/src/app/dist/angular /usr/share/nginx/html
 
 # Exposing port
