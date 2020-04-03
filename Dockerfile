@@ -6,10 +6,10 @@ RUN npm install -g @angular/cli
 
 WORKDIR /usr/src/app
 
-## Copy all files to working dir
+# Copy all files to working dir
 COPY . .
 
-##Running npm install and build
+# Running npm install and build
 RUN npm install
 RUN ng build --prod
 
@@ -17,11 +17,12 @@ FROM nginx:alpine
 
 WORKDIR /usr/src/app
 
-## Remove default nginx index page
+# Remove default nginx index page
 RUN rm -rf /usr/share/nginx/html/*
 
 COPY --from=builder /usr/src/app/dist/angular /usr/share/nginx/html
 
+# Exposing port
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
