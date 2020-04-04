@@ -11,7 +11,7 @@ COPY . .
 
 # Running npm install and build
 RUN npm install
-RUN ng build --prod
+RUN ng build --prod --configuration local
 
 FROM nginx:alpine
 
