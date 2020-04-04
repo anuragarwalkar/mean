@@ -66,10 +66,10 @@ export class PostCreateComponent implements OnInit {
   }
   });
 
-  this.postService.getSpinnerListner().subscribe((isSaveEditDisabled)=>{
-    this.isSaveEditDisabled = isSaveEditDisabled; 
-    this.onCancel();
-  })
+  // this.postService.getSpinnerListner().subscribe((isSaveEditDisabled)=>{
+  //   this.isSaveEditDisabled = isSaveEditDisabled; 
+  //   this.onCancel();
+  // })
 }
 
   onCancel(){

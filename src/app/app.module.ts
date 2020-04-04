@@ -16,6 +16,13 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatExpansionModule} from '@angular/material/expansion'; 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
+// socket connection 
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { environment } from 'src/environments/environment';
+const url = environment.api;
+const config: SocketIoConfig = { url, options: {} };
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +41,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent]
