@@ -151,7 +151,12 @@
         },
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
-          "options": {}
+          "options": {
+            "baseHref": "https://anuragarwalkar.github.io/angular-material/",
+            "repo": "https://github.com/anuragarwalkar/angular-material.git",
+            "name": "Anurag Arwalkar",
+            "email": "anuragarwalkar@gmail.com"
+          }
         }
       }
     }
