@@ -2,7 +2,7 @@ FROM node:10 as builder
 
 RUN node --version
 
-RUN npm install -g @angular/cli
+# RUN npm install -g @angular/cli
 
 WORKDIR /usr/src/app
 
@@ -11,7 +11,7 @@ COPY . .
 
 # Running npm install and build
 RUN npm install
-RUN ng build --prod --configuration local
+RUN npm run ng build --prod --configuration local
 
 FROM nginx:alpine
 
