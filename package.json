@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0 --disable-host-check",
-    "build": "ng build --prod",
+    "build": "ng build --prod --configuration local",
     "deploy": "ng deploy --base-href=https://anuragarwalkar.github.io/angular-material/",
     "test": "ng test",
     "lint": "ng lint",
