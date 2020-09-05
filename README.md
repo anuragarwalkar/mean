@@ -19,6 +19,9 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Build 
 
+Continues Intigration And Continues Deployment Using GitHub Actions
+Build and deployment will automatically pick by GitHub Workflow when changes in master branch
+
 ng build --prod --base-href "https://anuragarwalkar.github.io/my-messages/"
 
 npx ngh --dir=dist/angular
