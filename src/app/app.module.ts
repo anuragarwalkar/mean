@@ -5,18 +5,18 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { PostCreateComponent } from './components/posts/post-create/post-create.component';
-import { headerComponent } from './components/posts/header/header-component';
+import { HeaderComponent } from './components/posts/header/header-component';
 import { PostListComponent } from './components/posts/post-list/post-list-component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatInputModule} from '@angular/material/input';   
-import {MatCardModule} from '@angular/material/card'; 
-import {MatButtonModule} from '@angular/material/button'; 
-import {MatToolbarModule} from '@angular/material/toolbar'; 
-import {MatExpansionModule} from '@angular/material/expansion'; 
+import {MatInputModule} from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatExpansionModule} from '@angular/material/expansion';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
-// socket connection 
+// socket connection
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
 const url = environment.api;
@@ -27,7 +27,7 @@ const config: SocketIoConfig = { url, options: {} };
   declarations: [
     AppComponent,
     PostCreateComponent,
-    headerComponent,
+    HeaderComponent,
     PostListComponent
   ],
   imports: [
