@@ -155,7 +155,8 @@
             "baseHref": "https://anuragarwalkar.github.io/my-messages/",
             "repo": "https://github.com/anuragarwalkar/my-messages.git",
             "name": "Anurag Arwalkar",
-            "email": "anuragarwalkar@gmail.com"
+            "email": "anuragarwalkar@gmail.com",
+            "noSilent": true
           }
         }
       }

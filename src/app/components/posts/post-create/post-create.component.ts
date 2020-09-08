@@ -1,80 +1,78 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { Post } from 'src/app/shared/post.model';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PostService } from 'src/app/services/post.service';
-import  {mimeType} from './mime-type-validator';
 @Component({
   selector: 'app-post-create',
   templateUrl: './post-create.component.html',
   styleUrls: ['./post-create.component.css']
 })
 export class PostCreateComponent implements OnInit {
-  createPost = true
-  createPostForm:FormGroup;
-  @ViewChild('form',{static:false}) form;
+  createPost = true;
+  createPostForm: FormGroup;
+  @ViewChild('form', {static: false}) form;
   toUpdatePostId: string;
-  editPost:boolean = false;
+  editPost = false;
   imagePreview: any;
-  isSaveEditDisabled:boolean;
+  isSaveEditDisabled: boolean;
 
-  constructor(private fb:FormBuilder,private postService:PostService) { }
+  constructor(private fb: FormBuilder, private postService: PostService) { }
 
-  onPostClick(){
-    if(!this.editPost){
-    if(this.createPostForm.valid){
+  onPostClick() {
+    if (!this.editPost) {
+    if (this.createPostForm.valid) {
       this.postService.addPost(this.createPostForm.value);
       this.form.resetForm();
     }
-  }else{
+  } else {
     this.onEditPost();
   }
   }
 
-  onImagePicked(event:Event){
+  onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
-    this.createPostForm.patchValue({image:file});
+    this.createPostForm.patchValue({image: file});
     this.createPostForm.get('image').updateValueAndValidity();
     const reader = new FileReader();
-    reader.onload = ()=>{
+    reader.onload = () => {
       this.imagePreview = reader.result;
-    }
+    };
     reader.readAsDataURL(file);
   }
 
-  onEditPost(){
-    this.postService.patchPost(this.toUpdatePostId,this.createPostForm.value);
-    this.form.resetForm();  
+  onEditPost() {
+    this.postService.patchPost(this.toUpdatePostId, this.createPostForm.value);
+    this.form.resetForm();
     this.editPost = false;
   }
 
   ngOnInit() {
     this.createPostForm = this.fb.group({
-      title:['',[Validators.required,Validators.minLength(5)]],
-      description:['',[Validators.required,Validators.minLength(10)]],
+      title: ['', [Validators.required, Validators.minLength(5)]],
+      description: ['', [Validators.required, Validators.minLength(10)]],
       // image:[null,[Validators.required],[mimeType]]
-      image:[null]
+      image: [null]
     });
 
-    this.postService.editPostListner().subscribe(res=>{
-      if(res != undefined || null){
+    this.postService.editPostListner().subscribe(res => {
+      if (res !== undefined || null) {
         this.toUpdatePostId = res._id;
         this.editPost = true;
         this.createPostForm.patchValue({
-          title:res.title,
-          description:res.description
+          title: res.title,
+          description: res.description
     });
   }
   });
 
   // this.postService.getSpinnerListner().subscribe((isSaveEditDisabled)=>{
-  //   this.isSaveEditDisabled = isSaveEditDisabled; 
+  //   this.isSaveEditDisabled = isSaveEditDisabled;
   //   this.onCancel();
   // })
 }
 
-  onCancel(){
+  onCancel() {
     this.editPost = false;
-    this.form.resetForm();  
+    this.form.resetForm();
     this.toUpdatePostId = null;
   }
 }
