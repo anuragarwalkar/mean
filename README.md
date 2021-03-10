@@ -19,6 +19,6 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Build 
 
-ng build --prod --base-href "https://anuragarwalkar.github.io/angular-material/"
+ng build --prod --base-href https://anuragarwalkar.github.io/my-messages/
 
 npx ngh --dir=dist/angular
